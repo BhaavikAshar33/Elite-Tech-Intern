@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A modern, responsive landing page to enhance user engagement and conversions.">
+    <title>Landing Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom animations */
+        .fade-in { animation: fadeIn 1s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Hero Section -->
+    <section class="h-screen flex flex-col justify-center items-center text-center bg-blue-600 text-white p-6">
+        <h1 class="text-5xl font-bold fade-in">Welcome to Our Landing Page</h1>
+        <p class="text-lg mt-4 fade-in">Enhancing user engagement with a modern UI/UX experience.</p>
+        <a href="#features" class="mt-6 px-6 py-3 bg-white text-blue-600 font-bold rounded-lg shadow-lg hover:bg-gray-200 transition">Learn More</a>
+    </section>
+    
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-6 text-center">
+        <h2 class="text-4xl font-bold mb-8">Key Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold">Modern UI/UX</h3>
+                <p class="mt-2 text-gray-600">Smooth animations and transitions for an interactive experience.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold">Responsive Design</h3>
+                <p class="mt-2 text-gray-600">Optimized for all screen sizes with Flexbox and Grid.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold">SEO Optimized</h3>
+                <p class="mt-2 text-gray-600">Uses semantic HTML, meta tags, and structured content.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call to Action -->
+    <section class="bg-blue-600 text-white text-center py-16">
+        <h2 class="text-3xl font-bold">Ready to Get Started?</h2>
+        <p class="mt-4">Join us today and experience an optimized digital presence.</p>
+        <a href="#" class="mt-6 inline-block px-6 py-3 bg-white text-blue-600 font-bold rounded-lg shadow-lg hover:bg-gray-200 transition">Sign Up</a>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="text-center py-6 bg-gray-900 text-white">
+        <p>&copy; 2025 Landing Page. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

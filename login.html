@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecurePass+ Authentication & Cricket Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #36D1DC, #5B86E5);
+            text-align: center;
+            color: white;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        .store-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+        input {
+            background: white;
+            color: black;
+        }
+        button {
+            background: #ff9a9e;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #ff758c;
+        }
+        label {
+            font-size: 14px;
+        }
+        .toggle {
+            color: yellow;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .product {
+            background: white;
+            color: black;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        .store-container button {
+            background: #FFC107;
+            color: black;
+        }
+        .store-container button:hover {
+            background: #FFA000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="authSection">
+        <h1>🔐 SecurePass+ <span id="formTitle">Login</span></h1>
+        <form id="authForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <label id="rememberMeLabel">
+                <input type="checkbox" id="rememberMe"> Remember Me
+            </label>
+            <button type="submit" id="authButton">Login</button>
+        </form>
+        <p id="authMessage"></p>
+        <p class="toggle" onclick="toggleForm()">Don't have an account? Register here</p>
+    </div>
+    <div class="store-container" id="storeSection">
+        <h1>🏏 Welcome to the Cricket Store</h1>
+        <div class="product">
+            <h2>Cricket Bat</h2>
+            <p>High-quality wooden bat for professional play.</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <h2>Cricket Ball</h2>
+            <p>Durable leather ball for practice and matches.</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <h2>Gloves</h2>
+            <p>Comfortable and protective batting gloves.</p>
+            <button>Add to Cart</button>
+        </div>
+    </div>
+    <script>
+        let isLogin = true;
+        const users = JSON.parse(localStorage.getItem("users")) || {};
+
+        document.getElementById("authForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            
+            if (isLogin) {
+                if (users[username] && users[username] === password) {
+                    localStorage.setItem("loggedInUser", username);
+                    document.getElementById("authSection").style.display = "none";
+                    document.getElementById("storeSection").style.display = "block";
+                } else {
+                    document.getElementById("authMessage").textContent = "Invalid username or password!";
+                    document.getElementById("authMessage").style.color = "red";
+                }
+            } else {
+                if (users[username]) {
+                    document.getElementById("authMessage").textContent = "Username already exists!";
+                    document.getElementById("authMessage").style.color = "red";
+                } else {
+                    users[username] = password;
+                    localStorage.setItem("users", JSON.stringify(users));
+                    document.getElementById("authMessage").textContent = "Registration successful! You can now login.";
+                    document.getElementById("authMessage").style.color = "green";
+                    toggleForm();
+                }
+            }
+        });
+
+        function toggleForm() {
+            isLogin = !isLogin;
+            document.getElementById("formTitle").textContent = isLogin ? "Login" : "Register";
+            document.getElementById("authButton").textContent = isLogin ? "Login" : "Register";
+            document.querySelector(".toggle").textContent = isLogin ? "Don't have an account? Register here" : "Already have an account? Login here";
+            document.getElementById("rememberMeLabel").style.display = isLogin ? "block" : "none";
+            document.getElementById("authMessage").textContent = "";
+        }
+    </script>
+</body>
+</html>
